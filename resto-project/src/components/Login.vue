@@ -14,6 +14,8 @@
 
 <script>
 import axios from 'axios';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     name: 'Login',
     data() {
@@ -27,6 +29,7 @@ export default {
             debugger;
             let result = await axios.get(`http://localhost:3000/users?email=${this.email}&password=${this.password}`);
             if (result.status == 200 && result.data.length > 0) {
+                toast.success("Login successfully.", { autoClose: 5000 });
                 localStorage.setItem("user-info", JSON.stringify(result.data[0]));
                 this.$router.push({ name: "Home" });
             }

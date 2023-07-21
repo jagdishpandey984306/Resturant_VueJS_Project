@@ -23,7 +23,9 @@
 
 <script>
 import Header from './Header.vue';
-import axios from 'axios'
+import axios from 'axios';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     name: 'Add',
     data() {
@@ -44,6 +46,7 @@ export default {
             }
             this.errors = [];
             if (!this.resturant.name) {
+                toast.success("Added Successfully",{autoClose:5000});
                 this.errors.push('Name required.');
             }
             if (!this.resturant.contact) {
@@ -61,6 +64,7 @@ export default {
                 });
 
                 if (result.status == 201) {
+                    toast.success("Added successfully.",{autoClose:5000});
                     this.$router.push({ name: "Home" });
                 }
             }

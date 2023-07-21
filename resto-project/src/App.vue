@@ -17,7 +17,7 @@ export default {
   color: #2c3e50;
 }
 
-body{
+body {
   padding: 0;
   margin: 0;
 }
@@ -28,7 +28,7 @@ body{
 
 .register input,
 .login input,
-.add  input{
+.add input {
   width: 300px;
   height: 40px;
   padding-left: 20px;
@@ -41,12 +41,19 @@ body{
 
 .register button,
 .login button,
-.add  button{
+.add button {
   width: 320px;
   height: 40px;
   border: 1px solid skyblue;
   background-color: skyblue;
   color: white;
   cursor: pointer;
+}
+
+.register button:hover,
+.login button:hover,
+.add button :hover {
+  background-color: #ddd;
+    color: #333;
 }
 </style>

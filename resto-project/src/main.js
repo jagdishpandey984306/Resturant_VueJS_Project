@@ -1,8 +1,11 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { CAlert } from '@coreui/vue';
+import '@coreui/coreui/dist/css/coreui.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-createApp(App).use(router).mount('#app')
+createApp(App)
+    .use(router)
+    .use(CAlert)
+    .mount('#app')
