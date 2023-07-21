@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "email": "legendjagdish1234@gmail.com",
+      "password": "jagdish",
+      "name": "Jagdish Pandey",
+      "id": 1
+    },
+    {
+      "email": "thejp12345@gmail.com",
+      "password": "jagdish",
+      "name": "Jagdish Pandey",
+      "id": 2
+    }
+  ],
+  "resturant": [
+    {
+      "name": "Burger King",
+      "contact": 9860034785,
+      "address": "Kathmandu,Nepal",
+      "id": 1
+    },
+    {
+      "name": "Trisara",
+      "contact": 9841505034,
+      "address": "Kathmandu,Nepal",
+      "id": 2
+    }
+  ]
+}
