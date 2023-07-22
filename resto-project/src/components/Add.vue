@@ -1,21 +1,19 @@
 <template>
     <Header />
     <h1>Add Resturant</h1>
-    <form class="add">
+    <form class="add" @submit.prevent="addResturant">
         <div class="row">
             <div class="col-md-6">
-                <input type="text" v-model="resturant.name" placeholder="Enter Name">
-                <input type="text" v-model="resturant.contact" placeholder="Enter Contact">
-                <input type="text" v-model="resturant.address" placeholder="Enter Address">
-                <button type="button" v-on:click="addResturant">Add New Resturant</button>
-            </div>
-            <div class="col-md-6">
-                <p v-if="errors.length">
-                    <b>Please correct the following error(s):</b>
-                <ul>
-                    <li v-for="error in errors">{{ error }}</li>
-                </ul>
-                </p>
+                <input type="text" v-model="formData.name" placeholder="Enter Name">
+                <p v-if="validationErrors.name" style="color: red;">{{ validationErrors.name }}</p>
+
+                <input type="text" v-model="formData.contact" placeholder="Enter Contact">
+                <p v-if="validationErrors.contact" style="color: red;">{{ validationErrors.contact }}</p>
+
+                <input type="text" v-model="formData.address" placeholder="Enter Address">
+                <p v-if="validationErrors.address" style="color: red;">{{ validationErrors.address }}</p>
+
+                <button type="submit">Add New Resturant</button>
             </div>
         </div>
     </form>
@@ -30,8 +28,8 @@ export default {
     name: 'Add',
     data() {
         return {
-            errors: [],
-            resturant: {
+            validationErrors: {},
+            formData: {
                 name: '',
                 contact: '',
                 address: ''
@@ -39,24 +37,18 @@ export default {
         }
     },
     methods: {
+        validateForm() {
+            this.validationErrors = {};
+            // Custom validation for username and email fields
+            this.validationErrors.name = this.$validate(this.username, 'required');
+            this.validationErrors.contact = this.$validate(this.contact, 'required');
+            this.validationErrors.address = this.$validate(this.address, 'required');
+        },
         async addResturant(e) {
             debugger
-            if (this.resturant.name && this.resturant.contact && this.resturant.address) {
-                return true;
-            }
-            this.errors = [];
-            if (!this.resturant.name) {
-                toast.success("Added Successfully",{autoClose:5000});
-                this.errors.push('Name required.');
-            }
-            if (!this.resturant.contact) {
-                this.errors.push('contact required.');
-            }
-            if (!this.resturant.address) {
-                this.errors.push('address required.');
-            }
-            e.preventDefault();
-            if (this.errors.length == 0) {
+            this.validateForm();
+            // Perform form submission if there are no errors
+            if (Object.keys(this.validationErrors).length === 0) {
                 let result = await axios.post("http://localhost:3000/resturant", {
                     name: this.resturant.name,
                     contact: this.resturant.contact,
@@ -64,7 +56,7 @@ export default {
                 });
 
                 if (result.status == 201) {
-                    toast.success("Added successfully.",{autoClose:5000});
+                    toast.success("Added successfully.", { autoClose: 5000 });
                     this.$router.push({ name: "Home" });
                 }
             }
