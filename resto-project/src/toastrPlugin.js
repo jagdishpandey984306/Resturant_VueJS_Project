@@ -1,23 +1,21 @@
-// toastrPlugin.js
+// Import the custom toastify component (replace 'vue-toastify' with the actual library name)
+import Toast from 'vue-toastification';
+import 'vue-toastification/dist/index.css';
 
-import { createApp } from 'vue';
-import VueToastr from 'vue-toastr';
+// Create an object that will act as the plugin
+const toastifyPlugin = {
+  install: (app) => {
+    // Inject the toastify component into the app as a global property
+    app.config.globalProperties.$toast = Toast;
 
-// Function to create and mount the toastr component
-function createToastrComponent(options) {
-  const app = createApp(VueToastr, options);
-  const toastrContainer = document.createElement('div');
-  document.body.appendChild(toastrContainer);
-  app.mount(toastrContainer);
-  return app.config.globalProperties.$toastr;
-}
-
-// Custom toastr plugin
-const ToastrPlugin = {
-  install(app, options) {
-    const toastr = createToastrComponent(options);
-    app.config.globalProperties.$toastr = toastr;
+    // Optionally, you can add custom methods or configurations to the toastify component here
+    // For example:npm i vue-toastification
+    app.config.globalProperties.$toastOptions = {
+      duration: 3000,
+      position: 'bottom-right',
+      //   // Other options
+    };
   },
 };
 
-export default ToastrPlugin;
+export default toastifyPlugin;

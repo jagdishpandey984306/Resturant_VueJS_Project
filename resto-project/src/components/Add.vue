@@ -17,6 +17,7 @@
             </div>
         </div>
     </form>
+    <button @click="showToast">Show Toast</button>
 </template>
 
 <script>
@@ -37,6 +38,14 @@ export default {
         }
     },
     methods: {
+        showToast() {
+            // Use the global $toast property to show the toast
+            this.$toast.show('This is a toast message!', {
+                duration: 3000,
+                position: 'bottom-right',
+                // Other configuration options (if applicable)
+            });
+        },
         validateForm() {
             this.validationErrors = {};
             // Custom validation for username and email fields
