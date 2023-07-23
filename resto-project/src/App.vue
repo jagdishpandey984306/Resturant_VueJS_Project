@@ -54,6 +54,15 @@ body {
 .login button:hover,
 .add button :hover {
   background-color: #ddd;
-    color: #333;
+  color: #333;
+}
+
+.card {
+  max-width: 400px;
+  margin: auto;
+}
+
+.error {
+  color: red;
 }
 </style>
